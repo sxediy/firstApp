@@ -1,8 +1,11 @@
 # firstApp
-This is my first application 
+  This is my first application 
 
-What is that and how is it work ?
+  What is that and how is it work ?
 So I will try to explain now in a nutshell.
+
+  This is the form of user data, displayed list of users with their data that will render to document after clicking the "Отправить" button  and ability to change the data according to some rules and delete user or mark users with one click. It's still possible to sort the list in different ways. Now in order.
+  First things first.
 
 Step1: Regarding a some RegEx pattern we can to input a correct name of user. What is correct and what is not is have a subjective.
 
