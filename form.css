@@ -1,0 +1,65 @@
+.footer {
+    box-shadow: 20px 20px 100px 1px rgba(28, 110, 120, 0.8);
+}
+
+form {
+	margin:10px 0 0 40px;
+	padding: 10px 0 20px 30px;
+	box-shadow: 20px 20px 700px 1px rgba(28, 110, 120, 0.8);
+}
+
+legend{
+	margin-bottom: 20px;
+    font-size: 2rem;
+
+}
+
+ input{
+ 	margin:15px 15px 10px 40px;
+   
+    font-family: 'Consolas', Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: #757575;
+    padding: .2em;
+    border-radius: 2px;
+    border: 1px solid lightgray;
+    outline: none;
+ }
+
+ textarea{
+ 	margin-top:5px;
+    padding-left: 20px;
+ }
+
+
+
+input:hover,textarea:hover {border:groove darkred 1px; outline:none;}
+input:focus:required {border:groove darkred 2px; outline:none;}
+
+input:required + label::after {content: "*";color:red; font-size:15pt;}
+
+input:optional:hover,textarea:hover { border:groove gray 1px; } /*optional - всё, то, где не указан явно required*/
+input:optional:focus,textarea:focus { border:groove gray 2px; } 
+
+input:focus:invalid + label::after { content: ' ⨉'; font-size:15pt; color:red; }
+#birthday:invalid + label::after { content: ' ⨉'; font-size:15pt; color:red; }
+[name=users] input:valid + label::after { content: ' ✓'; color:green; font-size:15pt;}
+textarea:valid + label::after { content: ' ✓'; color:green; font-size:15pt;}
+textarea:focus{outline:none;}
+
+
+input[name='number']:in-range {border-color:green;}
+input[name='number']:out-of-range {border-color:red;}
+
+
+form dt {  
+    float: left;
+    clear: both;
+     width: 70px;
+     text-align: right;
+     position: relative;
+     top: 17px;
+    }
+
+legend {color:black;}
+

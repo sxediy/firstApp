@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<style> 
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Данные пользоателя</title>
+   <link rel="stylesheet" href="grid.css">
+   <link rel="stylesheet" href="form.css">
+   <link rel="stylesheet" href="userdata.css">   
+    <meta http-equiv="Content-Type">
+        
+</head>
+<body>
+
+<div class="container" id='container'>
+     <header class='header'>Header</header>
+     <main class='main' id='main'>
+
+    <form action=#event.js name='users'>      <!-- ФОРМА ВВОДА ДАННЫХ-->
+  
+       <dl>
+         <legend> Данные пользователя </legend>   
+         <dt><label for='name'>Имя </label></dt>
+         <dd><input name='name' id='name' type='text' placeholder="с заглавной буквы" pattern="^[A-Z][a-z'-]*[a-z]+[IVX]?[IVX]?[I]{0,2}|[А-ЩЭЮЯЁ][а-яё'-]*[а-яё]+[IVX]?[IVX]?[I]{0,2}$" required autocomplete='off'><label for='name'> </label></dd>
+    
+         <dt><label for='age'>Возраст</label></dt> 
+         <dd><input name='age' id='age' type='number' step='any' min='0' max='117'  placeholder="0 - 117" required><label for='age'> </label></dd>
+
+         <dt><label for='day'>День Рождения</label></dt> 
+         <dd><input name='day' id='birthday' type='date'  min="1900-01-01" max='2017-09-01' placeholder="необязательное поле"><label for='day'></label></dd>
+      </dl>
+
+        <label for='comment'>Комментарии  </label> </br>
+        <textarea  name='comment' rows="3" cols="45" placeholder="необязательное поле"></textarea> <label for='comment'> </label>
+
+        <div><input type='submit' value='Отправить' id='sendUserData'></div> 
+   
+    </form>
+
+
+    <div id= "sortButtons"  class='hideSortButtons' >
+                <button  type="submit" id="buttonForNames" disabled>По алфавиту</button>
+                <button  type="submit" id="buttonForAges" disabled>По возрасту</button>
+    </div>
+
+
+       <!-- <ul id="user-list">
+                <li class="user-item">
+                    <input class="checkbox" type="checkbox">
+                    <label class="title"></label>
+                    <input class="textfield" type="text"> 
+                    <button class="edit">Изменить</button>
+                    <button class="delete">Удалить</button>   
+                </li>
+            </ul> --> 
+    <div id= "deletecheckedAndUncheckAll"  class='notselectdeletechecked'>
+                
+                <button  type="submit" id="buttonDeleteChecked">Удалить отмеченные</button>
+                <button  type="submit" id="buttonUnChecked">Снять все галочки</button>
+    </div>
+
+
+    </main>
+    <aside class='left'>Menu 1</aside>
+    <aside class='right'>Menu 2</aside>
+    <footer class='footer'>Footer</footer>
+</div>    
+    
+</body>
+<script src="event.js"></script>
+</html>

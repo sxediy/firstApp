@@ -1,0 +1,70 @@
+* {
+	border-radius:20px;
+	font-style:italic;
+	
+}
+
+/*в body можно занулить отступы от границ окна браузера*/
+
+.container>* {    /*селектор для всех элементов внутри класса "контейнер" */
+  padding: 20px;  /*отступы для названий семантических блоков*/
+  /*margin: 5px;  */  /*отступы между блоками  аналогично grid-gap: 10px в селекторе самого класса "контейнер" */ 
+
+  }
+
+  header{ /*можно обратиться по классу, но мы обратились по тэгу*/
+	grid-area:header;
+	border: 2px solid #f0f0f0;
+	text-decoration: line-through;
+}
+
+  footer{
+	grid-area:footer;
+    border: 2px solid #f0f0f0;
+    text-decoration: line-through;
+}
+
+  main {
+	grid-area:main;
+	background: white;
+	border: 1px solid #f0f0f0;
+	border-bottom: 2px solid #ccc; 
+}	
+
+.left{
+	grid-area:left;
+	border: 2px solid #f0f0f0;
+    text-decoration: line-through;
+}
+
+.right{
+	grid-area:right;
+	border: 2px solid #f0f0f0;
+	text-decoration: line-through;
+}
+
+.container{
+	border: groove firebrick 1px;
+	display: grid;
+	grid-template-areas:'header header header' 
+	                     'left main right'
+	                     'footer footer footer'; /*точка оставляет ячейку пустой*/
+
+	grid-template-columns:150px 1fr 150px;
+	grid-template-rows: 100px 1fr 100px;                     
+    min-height: 100vh; /*растягивает контейнер на всю высотку окна браузера*/
+     grid-gap: 15px 10px; /*как margin 5px, только между элементами контейнера*/
+     
+}
+
+@media all and (max-width: 600px) {
+	.container {
+	grid-template-areas: "header"
+	                       'left'
+	                       'main'
+	                       'right'
+	                       'footer';
+	grid-template-columns: 100%;
+	grid-template-rows: 100px 50px 1fr 50px 30px;                   
+  }
+}

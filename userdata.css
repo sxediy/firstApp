@@ -1,0 +1,160 @@
+
+
+
+button {
+    background: 0 0;
+    border: none;
+    border-radius: 2px;
+    color: #757575;
+    position: relative;
+    height: 36px;
+    margin: 0;
+    min-width: 64px;
+    padding: 0 16px;
+    display: inline-block;
+    font-family: "Consolas","Helvetica","Arial",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    overflow: hidden;
+    will-change: box-shadow;
+    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 36px;
+    vertical-align: middle;
+    order:3;
+}
+
+button:hover {
+    background-color: rgba(158,158,158,.2);
+}
+
+.user-list {
+    display: flex;
+    justify-content:space-around;
+    flex-direction:column;
+}
+
+.user-item {
+    display: flex;
+    font-size: 1rem;
+    border-top: 1px solid rgba(0,0,0,.1);
+    background-color: #fff;
+    transition: all .2s;
+    -webkit-user-select: none;
+    user-select: none;
+    padding: 1em;
+    align-items: center;
+}
+
+.user-item.completed * { /*при нажатии на чекбокс*/
+    color: lightgray;
+}
+
+
+.user-item .checkbox {
+    margin-right: .5rem;
+}
+
+.user-item .title1, .user-item .title2,
+.user-item .textfield1, .user-item .textfield2 {
+    margin-right: auto;
+}
+
+.user-item.completed .title1, .user-item.completed .title2 { /*перечеркивает title внутри li*/
+    text-decoration: line-through;
+}
+
+
+.delete:disabled{ /*когда хотя бы 1 флажок активен*/
+   text-decoration: line-through;
+   color: darkred;
+}
+
+.user-item.editing1 .title1{
+    display: none;
+}
+
+.user-item.editing1 .title2{
+   order:2;
+}
+
+ .user-item.editing2 .title2{
+    display: none;
+ }
+
+.user-item .textfield1, .user-item .textfield2 {
+    display: none;
+}
+
+.user-item.editing1 .textfield1 { /* чтобы только 1 из 2 окошек редактирования появлялось*/
+    display: block;
+}
+
+.user-item.editing2 .textfield2 {
+    display: block;
+}
+
+ .user-item button {
+    opacity: 0.2;
+    transition: all .2s;
+}
+
+.user-item:hover button {
+    opacity: 1;
+}
+
+#deletecheckedAndUncheckAll{ /* контейнер кнопки 'удалить отмеченные' и 'снять галочки'*/
+    display: flex;
+    flex-direction:row-reverse;
+    justify-content:space-between;
+  }
+
+.notselectdeletechecked{  /* контейнер кнопки 'удалить отмеченные' и 'снять галочки'*/
+     opacity: 0;
+     transition: all 1s;
+
+}
+
+.buttondeletechecked { /*большая кнопка "удалить отмеченные" */
+    color: darkred;
+   font-size: 16px;
+    font-weight: bolder;
+    opacity: 1;
+    transition: all 1s;
+}
+
+#sortButtons{ /* контейнер кнопок сортировки'*/
+  display: flex;
+  padding-top: 60px;
+}
+
+.hideSortButtons{ /* контейнер кнопок сортировки' */
+    opacity: 0;
+    transition: all 1s;
+}
+
+.increaseSort::after{
+content: ' ▲'; 
+font-size:12pt;
+color: darkred;
+}
+
+.decreaseSort::after{
+content: ' ▼'; 
+font-size:12pt;
+color: darkred;
+}
+
+
+#stylecheckbox {  /* симпатишшшный чекбокс */
+  transform:scale(1.5);
+  opacity:0.9;
+  cursor:pointer;
+  }
+
+
