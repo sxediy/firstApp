@@ -117,6 +117,7 @@ button:hover {
 .notselectdeletechecked{  /* контейнер кнопки 'удалить отмеченные' и 'снять галочки'*/
      opacity: 0;
      transition: all 1s;
+     visibility: hidden;
 
 }
 
@@ -136,6 +137,7 @@ button:hover {
 .hideSortButtons{ /* контейнер кнопок сортировки' */
     opacity: 0;
     transition: all 1s;
+    visibility: hidden;
 }
 
 .increaseSort::after{

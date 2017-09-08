@@ -1,6 +1,6 @@
-const simpleApp = (() => { // обёртка всего кода (паттерн "Фасад" )
+const simpleApp = (() => {                    // Обёртка всего кода (паттерн "Фасад" ).
 
-function createElement(tag, props, ...children) {  // функция создания новых элементов наподобие ф-ции в React
+function createElement(tag, props, ...children) {                               // Функция создания новых элементов наподобие ф-ции в React.
 	const element = document.createElement(tag);
 
 	Object.keys(props).forEach(key => element[key] = props[key]);
@@ -18,20 +18,20 @@ return element
 }
 
 
-function createSuffix(userAge,indexUser) {  // учитывается склонение слова "год" согласно правилам русского языка (1 год, 4 года, 5 лет и т.д.)
+function createSuffix(userAge,indexUser) {                                      // Учитывается склонение слова "год" согласно правилам русского языка (1 год, 4 года, 5 лет и т.д.).
      var suffix ;
     if (userAge >=5 &&  userAge<=20)  suffix = 'лет';   
 	else if ((userAge>=2 && userAge<=4) || (userAge % 10 === 2 || userAge % 10 === 3 || userAge % 10 === 4) )  suffix = 'года';
 	else if (userAge === 1 || userAge % 10 === 1 ) suffix = 'год';
 	else suffix = 'лет'; 
-	array[indexUser].suffix = suffix; // запись "суффикса" в массив данных
+	array[indexUser].suffix = suffix;                                           // запись "суффикса" в массив данных
 	 
-	console.log('суффик - '+suffix);
+	console.log('суффик - '+ suffix);
    
    };
 
 
-function createItem(title1, title2, title3) {    // передача данных пользователя ф-ции , создающей элементы в DOM
+function createItem(title1, title2, title3) {                                   // Передача данных пользователя ф-ции , создающей элементы в DOM.
 	
 	const checkbox = createElement('input', {type:'checkbox', className:'checkbox', id:'stylecheckbox'});
 
@@ -47,12 +47,12 @@ function createItem(title1, title2, title3) {    // передача данны�
 	
 	const listItem = createElement('li', {className:'user-item'}, checkbox, label1, label2, editInput1, editInput2, editButton1, editButton2, deleteButton );
    
-   bindEvents(listItem); // подписка на события
+   bindEvents(listItem);                                                       // Подписка на события.
     return listItem;
    
 }
 
-function bindEvents(item) {                                // подписка на события
+function bindEvents(item) {                                                    // Подписка на события.
 	const checkbox = item.querySelector('.checkbox');
 	const editButton1 = item.querySelector('.edit');
 	const editButton2 = item.querySelectorAll('.edit')[1];
@@ -65,56 +65,60 @@ function bindEvents(item) {                                // подписка �
 }
 
 
-function addItem(event,indexUser) {    // добавления данных нового пользователя
+function addItem(event,indexUser) {                                            // Добавление данных нового пользователя.
     const  userName = document.forms.users.elements.name.value;
     const  userAge =  document.forms.users.elements.age.value;
 
 	
 	const item = createItem(userName, userAge, array[indexUser].suffix);
 	userList.appendChild(item) ;
-	if(array.length>=2) {
+	if(array.length>=2) {                                                      //активация кнопок сортировки
 		sortButtons.classList.remove('hideSortButtons');
 	    buttonForNames.disabled = false;	  	    	
 	    buttonForAges.disabled = false;
-	} else {null;}; 
+	} else {null;};
 
+	sortDirection(buttonForNames, true);                                                          //спрятать треугольники направлений сортировки
+	sortDirection(buttonForAges, true);
+	Array.from(document.querySelectorAll('.user-item')).forEach(item => item.style.order = 0 );  // вернуть порядок по добавлению в список пользователей 
+    console.log('порядок пользователей на странице соответствует порядку добавления пользователей через форму');
 	 console.log( array );                              
 };
 
 
 
-  function toggleItem(){                       // изменяет стиль при выборе/снятии чекбокса вешанием/снятием класса в CSS
+  function toggleItem(){                                                       // Изменяет стиль при выборе/снятии чекбокса вешанием/снятием класса в CSS.
   	const listItem = this.parentNode;
    	                      
   	listItem.classList.toggle('completed');
   	const isCompleted = listItem.parentNode.querySelector('.completed'); 
-  	const deleteButtons = listItem.parentNode.querySelectorAll('.delete'); //все кнопки 'удалить'
+  	const deleteButtons = listItem.parentNode.querySelectorAll('.delete');     // Все кнопки 'удалить'.
    	
      	
-    if(isCompleted) {  // если хотя бы один флажок активен
+    if(isCompleted) {                                                          // если хотя бы один флажок активен
    	   
-   	  	   [].forEach.call(deleteButtons, button => button.disabled = true);  // /все кнопки 'удалить' отключаются
+   	  	   [].forEach.call(deleteButtons, button => button.disabled = true);   // /Все кнопки 'удалить' отключаются.
    	     
- 	  	   switchDeleteCheckedAndUncheckAll(false); // кнопки 'удалить отмеченные' и 'снять все галочки' появляются и становятся активными
- 	  	   switchSortButtons(true);        // кнопки сортировки отключаются  и становятся невидимыми
+ 	  	   switchDeleteCheckedAndUncheckAll(false);                            // Кнопки 'удалить отмеченные' и 'снять все галочки' появляются и становятся активными.
+ 	  	   switchSortButtons(true);                                            // Кнопки сортировки отключаются  и становятся невидимыми.
    	  	    
-   	  	} else {   // когда нет ни одного флажка
+   	  	} else {                                                               // Когда нет ни одного флажка.
         
-   	      [].forEach.call(deleteButtons, button => button.disabled = false); // /все кнопки 'удалить' включются
+   	      [].forEach.call(deleteButtons, button => button.disabled = false);   // /Все кнопки 'удалить' включются.
    	  	   
-   	  	    switchSortButtons();             // кнопки сортировки вкключаются  и становятся видимыми
-   	        switchDeleteCheckedAndUncheckAll(true); 	// кнопки 'удалить отмеченные' и 'снять все галочки' исчезают и выключаются 	    
+   	  	    switchSortButtons();                                               // Кнопки сортировки вкключаются  и становятся видимыми.
+   	        switchDeleteCheckedAndUncheckAll(true); 	                       // Кнопки 'удалить отмеченные' и 'снять все галочки' исчезают и выключаются. 	    
    	  	};    		
   };
 
 
 
-function editItem1(event) {    // редактирование имени пользователя                           
-	const listItem = this.parentNode;                          // 'li'
-	const title1 = listItem.querySelector('.title1');            // элемент label
-	const editInput1 = listItem.querySelector('.textfield1');    // поле ввода
+function editItem1(event) {                                      // Редактирование имени пользователя.                           
+	const listItem = this.parentNode;                            // 'li'.
+	const title1 = listItem.querySelector('.title1');            // Элемент label.
+	const editInput1 = listItem.querySelector('.textfield1');    // Поле ввода.
 	
-	const isEditing1 = listItem.classList.contains('editing1');  // режим редактирования согласно регулярному выражению
+	const isEditing1 = listItem.classList.contains('editing1');  // Режим редактирования согласно регулярному выражению.
 
 	if(isEditing1) {
 		const matchPatternArray = editInput1.value.match(/^[A-Z][a-z'-]*[a-z]+[IVX]?[IVX]?[I]{0,2}$|^[А-ЩЭЮЯЁ][а-яё'-]*[а-яё]+[IVX]?[IVX]?[I]{0,2}$/); 
@@ -127,7 +131,12 @@ function editItem1(event) {    // редактирование имени пол
 	      array[index].name = title1.textContent;
 	      console.log(`новое имя пользователя ${index} = ${array[index].name}`); 
 
-	      console.log( array );  
+	      console.log( array ); 
+
+	      sortDirection(buttonForNames, true);                                                         //спрятать треугольники направлений сортировки
+	      sortDirection(buttonForAges, true);  
+	      Array.from(document.querySelectorAll('.user-item')).forEach(item => item.style.order = 0 );  // вернуть порядок по добавлению в список пользователей
+          console.log('порядок пользователей на странице соответствует порядку добавления пользователей через форму');
 
 		} else if (!matchPatternArray) {
           title1.textContent = title1.textContent;
@@ -135,16 +144,18 @@ function editItem1(event) {    // редактирование имени пол
           this.textContent = 'Изменить Имя' ;
 		} else  this.textContent = 'Изменить Имя' ;                    
 			           
-	} else {  // сохранения данных
+	} else {                                                     // сохранения данных
 		editInput1.value = title1.textContent;
 		this.textContent = 'Сохранить Имя';
 	}
 
-	listItem.classList.toggle('editing1') // переход в блок  редактирования
+	listItem.classList.toggle('editing1')                        // Переход в блок  редактирования.
+
+
 };
 
 
-function editItem2(event) {                                  // редактирование возраста пользователя
+function editItem2(event) {                                  // Редактирование возраста пользователя.
 	const listItem = this.parentNode;                          
 	const title2 = listItem.querySelector('.title2');           
 	const editInput2 = listItem.querySelector('.textfield2');    
@@ -168,6 +179,11 @@ function editItem2(event) {                                  // редактир
 
 	        console.log( array );  
 
+	        sortDirection(buttonForNames, true);                                                         //спрятать треугольники направлений сортировки
+	        sortDirection(buttonForAges, true);
+	        Array.from(document.querySelectorAll('.user-item')).forEach(item => item.style.order = 0 );  // вернуть порядок по добавлению в список пользователей
+            console.log('порядок пользователей на странице соответствует порядку добавления пользователей через форму');
+
 		} else if (!matchPatternArray) {
 			alert('Допустимое значение возраста: 0 - 119');
 		} else this.textContent = 'Изменить Возраст' ;
@@ -183,65 +199,65 @@ function editItem2(event) {                                  // редактир
 
 
 
-function deleteItem(event) {        // удаление одного пользователя                        
+function deleteItem(event) {                      // Удаление одного пользователя.                        
 	const listItem = this.parentNode; 
 
 	const index = [].indexOf.call(userList.querySelectorAll('.user-item'),listItem);
 
-	console.log( 'удалился indexOf = '+ index );  // индекс в массиве данных всех пользователей
+	console.log( 'удалился indexOf = '+ index );  // Индекс в массиве данных всех пользователей.
 
-	array.splice(index,1); // удаление объекта данных  пользователя из массива
+	array.splice(index,1);                        // Удаление объекта данных  пользователя из массива.
 
-	userList.removeChild(listItem);  //удаление элемента в DOM
+	userList.removeChild(listItem);               // Удаление элемента в DOM.
 
-	switchSortButtons(); // после удаления доступны клавиши сортировки (если количество пользователей от двух)
+	switchSortButtons();                          // После удаления доступны клавиши сортировки, если количество пользователей от двух.
 
 	console.log( array );
 
 };
 
     
-	const userList = createElement('ul', {className:'user-list'}); // контейнер элементов DOM . элементами являются строки с данными пользователя
-	main.insertBefore(userList, deletecheckedAndUncheckAll); // вставка перед кнопками 'удалить отмеченные' и 'снять все галочки'
+	const userList = createElement('ul', {className:'user-list'});       // Контейнер элементов DOM. Элементами являются строки с данными пользователя.
+	main.insertBefore(userList, deletecheckedAndUncheckAll);             // Вставка перед кнопками 'удалить отмеченные' и 'снять все галочки'.
 
     
-	 buttonDeleteChecked.addEventListener('click', deleteChecked); // 'удалить отмеченные'
-	 buttonUnChecked.addEventListener('click', unChecked );        // 'снять все галочки'
+	 buttonDeleteChecked.addEventListener('click', deleteChecked);       // 'Удалить отмеченные'.
+	 buttonUnChecked.addEventListener('click', unChecked );              // 'Снять все галочки'.
 
-	 buttonForNames.addEventListener('click', sortByName);        //сортировка по алфавиту
-	 buttonForAges.addEventListener('click', sortByAge);          // сортировка по возрасту
+	 buttonForNames.addEventListener('click', sortByName);               // Сортировка по алфавиту.
+	 buttonForAges.addEventListener('click', sortByAge);                 // Сортировка по возрасту.
 
   
-function deleteChecked(event) {                      // удаление отмеченных пользователей   
+function deleteChecked(event) {                                          // Удаление отмеченных пользователей.   
 const userItems = document.querySelectorAll('.user-item');
     event.preventDefault();
-    const deleteButtons = document.querySelectorAll('.delete');  //все кнопки 'удалить'
-    [].forEach.call(deleteButtons, button => button.disabled = false); // отключение
+    const deleteButtons = document.querySelectorAll('.delete');          // Все кнопки 'удалить'.
+    [].forEach.call(deleteButtons, button => button.disabled = false);   // Отключение.
 
         
    console.log('удалить отмеченные')
 
 
-	let i =0;
+	let i = 0;
 
-	for (key of Object.keys(userItems) ) {   //  удаление объектов данных пользователей, выделенных флажками, из массива 
+	for (key of Object.keys(userItems) ) {                     // Удаление объектов данных пользователей, выделенных флажками, из массива... 
 		if (userItems[key].firstChild.checked === true) {
 			 
 			 array.splice(key-i,1);
 			 console.log(`удалились индексы:  ${key}`);
-			userList.removeChild(userItems[key]) ;  // и из DOM
+			userList.removeChild(userItems[key]) ;             // ...и из DOM.
 		    i++;
 		}
  	 };
 
-  switchDeleteCheckedAndUncheckAll(true); // 'удалить отмеченные' и 'снять все галочки' активны
-  switchSortButtons();    // становятся доступными клавиши сортировки (если количество пользователей от двух)
+  switchDeleteCheckedAndUncheckAll(true);                      // 'Удалить отмеченные' и 'снять все галочки' активны.
+  switchSortButtons();                                         // Становятся доступными клавиши сортировки, если количество пользователей от двух.
 
   console.log( array );
 
 };
 
-function unChecked(event) {  // ищет все установленные флажки(галочки) и их снимает
+function unChecked(event) {                                                   // Ищет все установленные флажки(галочки) и их снимает...
 	
 	Array.from(main.querySelectorAll('.completed')).forEach( box => {
 	  box.querySelector('.checkbox').checked = false, 
@@ -249,7 +265,7 @@ function unChecked(event) {  // ищет все установленные фл�
 	  box.classList.remove('completed');
     }) ;
 
-    Array.from(main.querySelectorAll('.delete')).forEach( button => { // после чего включает все кнопки 'удалить'
+    Array.from(main.querySelectorAll('.delete')).forEach( button => {         // ...после чего включает все кнопки 'удалить'.
     	button.disabled = false;
     });
     
@@ -259,14 +275,14 @@ function unChecked(event) {  // ищет все установленные фл�
     console.log('снять отмеченные') 
 };
 
-function switchSortButtons(force) { // включает/выключает кнопки сортировки и регулирует их прозрачность
+function switchSortButtons(force) {                                           // Включает/выключает кнопки сортировки и регулирует их прозрачность...
 
 if(force) {
-	   buttonForNames.disabled = true; //по алфавиту
-   	   buttonForAges.disabled = true;  // по имени
-   	   sortButtons.classList.add('hideSortButtons'); // прозрачность
+	   buttonForNames.disabled = true;                                        // ...по алфавиту, ...
+   	   buttonForAges.disabled = true;                                         // ...по имени.
+   	   sortButtons.classList.add('hideSortButtons');                          // Прозрачность.
      	 
-   	} else if(array.length >= 2){ // если в массиве(а значит и в DOM) элементов <2 , то нет смысла активизировать кнопки сортировки
+   	} else if(array.length >= 2){                                             // Если в массиве, а значит и в DOM, элементов <2 , то нет смысла активизировать кнопки сортировки.
    		buttonForNames.disabled = false;
    	    buttonForAges.disabled = false;
    	    sortButtons.classList.remove('hideSortButtons');
@@ -274,7 +290,7 @@ if(force) {
    	  
 };
 
-function switchDeleteCheckedAndUncheckAll(off) {  // включает/выключает кнопки 'удалить отмеченные' и 'снять все галочки'
+function switchDeleteCheckedAndUncheckAll(off) {                              // Включает/выключает кнопки 'удалить отмеченные' и 'снять все галочки'.
 	if(off) {
 		deletecheckedAndUncheckAll.classList.add('notselectdeletechecked');
         buttonDeleteChecked.classList.remove('buttondeletechecked');
@@ -289,35 +305,40 @@ function switchDeleteCheckedAndUncheckAll(off) {  // включает/выклю
 };
 
 
-function sortByName(event) {  // сортировка по имени
+function sortByName(event) {                                                  // Сортировка по имени.
 	console.log('сорт бай алфавит');
+    
+	buttonForAges.className = '';                                             // Удаляет треугольник сортировки с другой кнопки.
 
-	buttonForAges.className = '';  // удаляет треугольник сортировки с другой кнопки
-
-	sortDirection(buttonForNames);  // переключение направления сортировки по алфавиту.
+	sortDirection(buttonForNames);                                            // Переключение направления сортировки по алфавиту.
 
 		  
-	const userItems =Array.from(document.querySelectorAll('.user-item'));  // все пользователи
-    const itemsSortByName = userItems.sort(makeSortByName('name', 'age'));    // массив отсортированных элементов , callback - функция сортировки по алфавиту 
+	const userItems = Array.from(document.querySelectorAll('.user-item'));     // Все пользователи.
+    const itemsSortByName = userItems.sort(makeSortByName('name', 'age'));    // Массив отсортированных элементов , callback - функция сортировки по алфавиту. 
 
-    function makeSortByName (name, age) { // функция для сортировки по имени
-      return function (a, b) {
- 	    if( a.children[1].textContent ===  b.children[1].textContent) { // если одинаковые имена 
- 		   return  parseInt(b.children[2].textContent) - parseInt(a.children[2].textContent); // то по убыванию возраста
- 	    } if(buttonForNames.className === 'increaseSort') {                         // направление сортировки в зависимости от текущего класса у элемента
- 	        return a.children[1].textContent > b.children[1].textContent ? 1 : -1;
+    function makeSortByName (name, age) {                                                      // Функция для сортировки по имени.
+      return function (a, b) {  
+ 	    if( a.children[1].textContent ===  b.children[1].textContent) {                        // Если одинаковые имена, ... 
+ 		   return  parseInt(b.children[2].textContent) - parseInt(a.children[2].textContent);  // ...то по убыванию возраста.
+ 	    } if(buttonForNames.className === 'increaseSort') {                                    // Направление сортировки в зависимости от текущего класса у элемента.
+ 	        return a.children[1].textContent > b.children[1].textContent ? 1 : -1; 
         } return a.children[1].textContent < b.children[1].textContent ? 1 : -1;
       }
     };
 
-	let i =0;
-	itemsSortByName.forEach(item => {    // элементамам отсортированным задаётся возрастающий параметр order flexbox для перерисовывания интерфейса 
+	let i = 0;
+	itemsSortByName.forEach(item => {                                                          // Элементамам отсортированным задаётся возрастающий параметр order технологии "flexbox" для перерисовывания интерфейса. 
       console.log(item,i), item.style.order = i ,i++;
 	});
 };
 
 
- function sortDirection(button) {          // изменяет направление сортировки с помощью присвоения одного и удаления другого класса
+ function sortDirection(button, hidden) {        // Изменяет направление сортировки с помощью присвоения одного и удаления другого класса.
+ 	    if(hidden) {                             // Когда добавляется новый пользователь или редактируются данные в списке - индификатор сортировки(треугольник) исчезает.
+ 	    	button.classList.remove('decreaseSort');
+ 	    	button.classList.remove('increaseSort');
+ 	    	return;
+ 	    }
 		if (button.className === 'decreaseSort' || !(button.className === 'decreaseSort' || button.className === 'increaseSort')) {
 			button.classList.remove('decreaseSort');
 			button.classList.add('increaseSort');
@@ -331,28 +352,28 @@ function sortByName(event) {  // сортировка по имени
 function sortByAge(event) {
 	console.log('сорт бай возраст');
 
-	buttonForNames.className = ''; // удаляет треугольник сортировки с другой кнопки
+	buttonForNames.className = '';                                         // Удаляет треугольник сортировки с другой кнопки.
 
-	sortDirection(buttonForAges); // переключение направления сортировки по возрасту.
+	sortDirection(buttonForAges);                                          // Переключение направления сортировки по возрасту.
 
 	
-	const userItems =Array.from(document.querySelectorAll('.user-item'));
-	const itemsSortByAge = userItems.sort( makeSortByAge('age', 'name'));    //массив отсортированных элементов, callback - функция сортировки по возрасту 
+	const userItems = Array.from(document.querySelectorAll('.user-item'));
+	const itemsSortByAge = userItems.sort( makeSortByAge('age', 'name'));  // Массив отсортированных элементов, callback - функция сортировки по возрасту. 
 
 
 
-	 function makeSortByAge (age, name) { // функция для сортировки по возрасту
+	 function makeSortByAge (age, name) {                                                        // Функция для сортировки по возрасту.
       return function (a, b) {
- 	    if( parseInt(b.children[2].textContent) ===  parseInt(a.children[2].textContent)) {     // если одинаковый возраст
- 		   return  a.children[1].textContent > b.children[1].textContent ? 1 : -1;              // то по алфавиту (по возрастанию А-Я)
- 	    } if(buttonForAges.className === 'increaseSort') {                                    // направление сортировки в зависимости от текущего класса у элемента
+ 	    if( parseInt(b.children[2].textContent) ===  parseInt(a.children[2].textContent)) {      // Если одинаковый возраст, ...
+ 		   return  a.children[1].textContent > b.children[1].textContent ? 1 : -1;               // ...то по алфавиту (по возрастанию А-Я).
+ 	    } if(buttonForAges.className === 'increaseSort') {                                       // Направление сортировки в зависимости от текущего класса у элемента.
  	        return parseInt(a.children[2].textContent) - parseInt(b.children[2].textContent);
         } return parseInt(b.children[2].textContent) - parseInt(a.children[2].textContent);
        }
      };
  
-    let i =0;
-	itemsSortByAge.forEach(item => {       // элементамам отсортированным задаётся возрастающий параметр order flexbox для перерисовывания интерфейса
+    let i = 0;
+	itemsSortByAge.forEach(item => {                                        // Элементамам отсортированным задаётся возрастающий параметр order технологии "flexbox" для перерисовывания интерфейса.
       console.log(item,i), item.style.order = i ,i++;
 	});
 
@@ -361,27 +382,27 @@ function sortByAge(event) {
 
 //
 
-const array = []; // массив данных пользователей
+const array = [];                                                           // Массив данных пользователей.
 
 
 
-document.forms.users.addEventListener('submit', addUser); // кнопка добавления нового пользователя
+document.forms.users.addEventListener('submit', addUser);                   // Кнопка добавления нового пользователя.
 
 function addUser(event){  
-	event.preventDefault(); // чтобы страница не перезагрузилась
-	const indexUser = array.length;  // индекс в масиве данных
-    array.splice(indexUser,0,{name: this.name.value, age: this.age.value}); //добавление данные пользователя в массив
+	event.preventDefault();                                                 // Чтобы страница не перезагрузилась.
+	const indexUser = array.length;                                         // Индекс в масиве данных.
+    array.splice(indexUser,0,{name: this.name.value, age: this.age.value}); // Добавление данные пользователя в массив.
     console.log('длина массива = ' + array.length);
-    const  userAge = this.age.value;    // возраст
-    createSuffix(userAge,indexUser); // лет/год/года
-    addItem(event,indexUser);  // процесс создания элемента в DOM c данными пользователя
-    resetForm();  //очистка формы после ее отправки в массив
-    document.forms.users.children[0].children[2].children.name.focus(); // после добавления пользователя переключается фокус на поле ввода имени нового пользователя 
+    const  userAge = this.age.value;                                        // Возраст.
+    createSuffix(userAge,indexUser);                                        // Лет/год/года.
+    addItem(event,indexUser);                                               // Процесс создания элемента в DOM c данными пользователя.
+    resetForm();                                                            // Очистка формы после её отправки в массив.
+    document.forms.users.children[0].children[2].children.name.focus();     // После добавления пользователя переключается фокус на поле ввода имени нового пользователя. 
 
 }; 
 
 
-function resetForm(event) {   //очистка формы ввода данных пользователя после отправки данных
+function resetForm(event) {                                                 // Очистка формы ввода данных пользователя после отправки данных.
 	document.forms.users.elements.name.value = '';
 	document.forms.users.elements.age.value = '';
   document.forms.users.elements.day.value = '';
