@@ -1,5 +1,5 @@
 # firstApp
-  This is my first application 
+  This is my first application. 
 
   What is that and how is it work ?
 So I will try to explain now in a nutshell.
@@ -9,7 +9,7 @@ So I will try to explain now in a nutshell.
 
 Step1: Regarding a some RegEx pattern we can to input a correct name of user. What is correct and what is not is have a subjective.
 
-Step2: Age of user must be between 0-117 years because according to Wikipedia the oldest person who now lives is 三宅金治郎 . His age is 116 years and several months. Аlmost 2 years later he won't be able to register here but but but...but the world of Web is so rapidly developing that I will rewrite this application, which will take into account the age of this respected person on the basis of artificial intelligence)))
+Step2: Age of user must be between 0-117 years because according to Wikipedia the oldest person who now lives is 三宅金治郎 . His age is 116 years and several months. Аlmost 2 years later he won't be able to register here but but but...but the world of Web is so rapidly developing that I will rewrite this application, which will take into account the age of this respected person on the basis of artificial intelligence.)))
 
 Step3: Onece these 2 required fields are filled you can safely to click the "Отправить" button.
 
